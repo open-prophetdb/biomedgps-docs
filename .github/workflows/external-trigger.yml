@@ -1,0 +1,184 @@
+name: External Repository Trigger
+
+on:
+  # Webhook endpoint for other repositories
+  repository_dispatch:
+    types: 
+      - docs-submitted
+      - component-updated
+
+jobs:
+  process-external-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Process documentation update
+        run: |
+          echo "Processing update from external repository"
+          echo "Event type: ${{ github.event.action }}"
+          echo "Repository: ${{ github.event.client_payload.repository }}"
+          echo "Branch: ${{ github.event.client_payload.branch || 'main' }}"
+          echo "Docs path: ${{ github.event.client_payload.docs_path || 'docs/' }}"
+          
+          REPO_NAME="${{ github.event.client_payload.repository }}"
+          BRANCH="${{ github.event.client_payload.branch || 'main' }}"
+          DOCS_PATH="${{ github.event.client_payload.docs_path || 'docs/' }}"
+          DOCS_URL="${{ github.event.client_payload.docs_url }}"
+          COMMIT_SHA="${{ github.event.client_payload.sha }}"
+          
+          # Validate repository name
+          case "$REPO_NAME" in
+            "network-medicine-extension"|"biomedgps-data"|"biomedgps-models"|"biomedgps-explainer"|"biomedgps")
+              echo "✓ Valid repository: $REPO_NAME"
+              ;;
+            *)
+              echo "❌ Invalid repository name: $REPO_NAME"
+              echo "Must be one of: network-medicine-extension, biomedgps-data, biomedgps-models, biomedgps-explainer, biomedgps"
+              exit 1
+              ;;
+          esac
+
+      - name: Download documentation from source repository
+        if: github.event.client_payload.docs_url
+        run: |
+          REPO_NAME="${{ github.event.client_payload.repository }}"
+          DOCS_URL="${{ github.event.client_payload.docs_url }}"
+          
+          echo "Downloading documentation from: $DOCS_URL"
+          
+          # Create target directory
+          mkdir -p "$REPO_NAME"
+          
+          # Download and extract docs
+          if curl -L -f "$DOCS_URL" -o docs-archive.tar.gz; then
+            echo "Successfully downloaded docs archive"
+            tar -xzf docs-archive.tar.gz -C "$REPO_NAME" --strip-components=1
+            rm docs-archive.tar.gz
+            echo "✓ Documentation extracted to $REPO_NAME/"
+          else
+            echo "❌ Failed to download documentation from $DOCS_URL"
+            exit 1
+          fi
+
+      - name: Clone and copy documentation from repository
+        if: "!github.event.client_payload.docs_url"
+        run: |
+          REPO_NAME="${{ github.event.client_payload.repository }}"
+          BRANCH="${{ github.event.client_payload.branch || 'main' }}"
+          DOCS_PATH="${{ github.event.client_payload.docs_path || 'docs/' }}"
+          GITHUB_ORG="${{ github.event.client_payload.github_org || github.repository_owner }}"
+          
+          echo "Cloning documentation from repository: $GITHUB_ORG/$REPO_NAME"
+          echo "Branch: $BRANCH"
+          echo "Docs path: $DOCS_PATH"
+          
+          # Clone the source repository
+          git clone --depth 1 --branch "$BRANCH" "https://github.com/$GITHUB_ORG/$REPO_NAME.git" temp-repo
+          
+          # Create target directory
+          mkdir -p "$REPO_NAME"
+          
+          # Copy documentation
+          if [ -d "temp-repo/$DOCS_PATH" ]; then
+            cp -r "temp-repo/$DOCS_PATH"/* "$REPO_NAME/"
+            echo "✓ Documentation copied from temp-repo/$DOCS_PATH"
+          else
+            echo "❌ Documentation path not found: temp-repo/$DOCS_PATH"
+            ls -la temp-repo/
+            exit 1
+          fi
+          
+          # Cleanup
+          rm -rf temp-repo
+
+      - name: Validate documentation structure
+        run: |
+          REPO_NAME="${{ github.event.client_payload.repository }}"
+          
+          if [ ! -d "$REPO_NAME" ]; then
+            echo "❌ No documentation directory created"
+            exit 1
+          fi
+          
+          # Check if there's at least an index.html or README
+          if [ -f "$REPO_NAME/index.html" ] || [ -f "$REPO_NAME/index.md" ] || [ -f "$REPO_NAME/README.md" ]; then
+            echo "✓ Valid documentation structure found"
+          else
+            echo "⚠ No main documentation file found, listing contents:"
+            ls -la "$REPO_NAME/"
+          fi
+
+      - name: Create update summary
+        run: |
+          REPO_NAME="${{ github.event.client_payload.repository }}"
+          COMMIT_SHA="${{ github.event.client_payload.sha }}"
+          COMMIT_MESSAGE="${{ github.event.client_payload.commit_message }}"
+          
+          echo "## Documentation Update Summary" > update-summary.md
+          echo "" >> update-summary.md
+          echo "- **Repository**: $REPO_NAME" >> update-summary.md
+          echo "- **Commit**: ${COMMIT_SHA:0:8}" >> update-summary.md
+          echo "- **Message**: $COMMIT_MESSAGE" >> update-summary.md
+          echo "- **Updated**: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> update-summary.md
+          echo "" >> update-summary.md
+          
+          if [ -d "$REPO_NAME" ]; then
+            echo "### Files Updated:" >> update-summary.md
+            find "$REPO_NAME" -type f | head -10 | while read file; do
+              echo "- $file" >> update-summary.md
+            done
+          fi
+          
+          cat update-summary.md
+
+      - name: Commit documentation updates
+        run: |
+          REPO_NAME="${{ github.event.client_payload.repository }}"
+          COMMIT_SHA="${{ github.event.client_payload.sha }}"
+          COMMIT_MESSAGE="${{ github.event.client_payload.commit_message || 'Updated documentation' }}"
+          
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action Bot"
+          
+          # Stage all changes
+          git add "$REPO_NAME/"
+          
+          if git diff --staged --quiet; then
+            echo "No changes detected, skipping commit"
+          else
+            # Commit with detailed message
+            git commit -m "docs($REPO_NAME): update documentation
+
+            Source commit: ${COMMIT_SHA:0:8}
+            Message: $COMMIT_MESSAGE
+            
+            Updated via automated workflow from $REPO_NAME repository.
+            Timestamp: $(date -u '+%Y-%m-%d %H:%M:%S UTC')
+            
+            Co-authored-by: GitHub Action <action@github.com>"
+            
+            echo "✓ Changes committed successfully"
+          fi
+
+      - name: Push changes
+        run: |
+          git push origin main
+          echo "✓ Documentation updates pushed to main branch"
+
+      - name: Trigger deployment
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          event-type: docs-updated
+          client-payload: |
+            {
+              "repository": "${{ github.event.client_payload.repository }}",
+              "message": "Documentation updated from ${{ github.event.client_payload.repository }}",
+              "commit_sha": "${{ github.event.client_payload.sha }}",
+              "trigger": "external"
+            }

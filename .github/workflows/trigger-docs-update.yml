@@ -1,0 +1,157 @@
+name: Trigger Documentation Update
+
+on:
+  # Manual trigger
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: 'Repository that updated docs'
+        required: true
+        type: choice
+        options:
+          - 'network-medicine-extension'
+          - 'biomedgps-data'
+          - 'biomedgps-models'
+          - 'biomedgps-explainer'
+          - 'biomedgps'
+      message:
+        description: 'Update message'
+        required: false
+        default: 'Documentation updated'
+
+  # Webhook trigger from other repositories
+  repository_dispatch:
+    types: [update-docs]
+
+jobs:
+  update-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Get repository info from dispatch
+        if: github.event_name == 'repository_dispatch'
+        run: |
+          echo "REPO_NAME=${{ github.event.client_payload.repository }}" >> $GITHUB_ENV
+          echo "UPDATE_MESSAGE=${{ github.event.client_payload.message }}" >> $GITHUB_ENV
+          echo "DOCS_URL=${{ github.event.client_payload.docs_url }}" >> $GITHUB_ENV
+
+      - name: Get repository info from manual trigger
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          echo "REPO_NAME=${{ github.event.inputs.repository }}" >> $GITHUB_ENV
+          echo "UPDATE_MESSAGE=${{ github.event.inputs.message }}" >> $GITHUB_ENV
+
+      - name: Download and update documentation
+        run: |
+          echo "Updating documentation for: $REPO_NAME"
+          
+          # Create target directory
+          mkdir -p "$REPO_NAME"
+          
+          # If docs_url is provided, download from it
+          if [ ! -z "$DOCS_URL" ]; then
+            echo "Downloading docs from: $DOCS_URL"
+            curl -L "$DOCS_URL" -o docs.tar.gz
+            tar -xzf docs.tar.gz -C "$REPO_NAME" --strip-components=1
+            rm docs.tar.gz
+          else
+            echo "No docs URL provided, creating placeholder"
+            # Create placeholder if no docs provided
+            cat > "$REPO_NAME/index.html" << EOF
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>$REPO_NAME - Documentation</title>
+              <style>
+                  body { 
+                      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                      display: flex; 
+                      justify-content: center; 
+                      align-items: center; 
+                      height: 100vh; 
+                      margin: 0; 
+                      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+                      color: #1f2937;
+                  }
+                  .container { 
+                      text-align: center; 
+                      padding: 2rem;
+                      background: white;
+                      border-radius: 16px;
+                      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+                      max-width: 500px;
+                  }
+                  h1 { 
+                      color: #6366f1; 
+                      margin-bottom: 1rem;
+                      font-size: 2rem;
+                  }
+                  p { 
+                      color: #6b7280; 
+                      font-size: 1.1rem;
+                      margin-bottom: 2rem;
+                  }
+                  .back-btn {
+                      background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+                      color: white;
+                      padding: 0.75rem 2rem;
+                      border: none;
+                      border-radius: 50px;
+                      text-decoration: none;
+                      font-weight: 600;
+                      transition: transform 0.2s;
+                  }
+                  .back-btn:hover {
+                      transform: translateY(-2px);
+                  }
+                  .timestamp {
+                      margin-top: 2rem;
+                      color: #9ca3af;
+                      font-size: 0.875rem;
+                  }
+              </style>
+          </head>
+          <body>
+              <div class="container">
+                  <h1>$REPO_NAME</h1>
+                  <p>$UPDATE_MESSAGE</p>
+                  <p>Last updated: $(date)</p>
+                  <a href="../" class="back-btn">← Back to Home</a>
+                  <div class="timestamp">Generated automatically by GitHub Actions</div>
+              </div>
+          </body>
+          </html>
+          EOF
+          fi
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          git add "$REPO_NAME/"
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "docs: update $REPO_NAME documentation
+            
+            $UPDATE_MESSAGE
+            
+            Auto-generated by GitHub Actions"
+            git push origin main
+          fi
+
+      - name: Trigger documentation deployment
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          event-type: docs-updated
+          client-payload: '{"repository": "${{ env.REPO_NAME }}", "message": "${{ env.UPDATE_MESSAGE }}"}'

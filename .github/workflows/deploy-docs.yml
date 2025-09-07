@@ -1,0 +1,229 @@
+name: Deploy Documentation
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  # Allow manual trigger
+  workflow_dispatch:
+  # Trigger when other repositories push to their docs
+  repository_dispatch:
+    types: [docs-updated]
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect package manager
+        id: detect-package-manager
+        run: |
+          if [ -f "${{ github.workspace }}/yarn.lock" ]; then
+            echo "manager=yarn" >> $GITHUB_OUTPUT
+            echo "command=install" >> $GITHUB_OUTPUT
+            echo "runner=yarn" >> $GITHUB_OUTPUT
+            exit 0
+          elif [ -f "${{ github.workspace }}/package.json" ]; then
+            echo "manager=npm" >> $GITHUB_OUTPUT
+            echo "command=ci" >> $GITHUB_OUTPUT
+            echo "runner=npx --no-install" >> $GITHUB_OUTPUT
+            exit 0
+          else
+            echo "Unable to determine package manager"
+            echo "manager=none" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: ${{ steps.detect-package-manager.outputs.manager != 'none' && steps.detect-package-manager.outputs.manager || '' }}
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        with:
+          # Automatically inject basePath in your Next.js configuration file and disable
+          # server side image optimization (https://nextjs.org/docs/api-reference/next/image#unoptimized).
+          #
+          # You may remove this line if you want to manage the configuration yourself.
+          static_site_generator: next
+
+      - name: Restore cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            .next/cache
+          # Generate a new cache whenever packages or source files change.
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          # If source files changed but packages didn't, rebuild from a prior cache.
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
+
+      - name: Install dependencies
+        if: steps.detect-package-manager.outputs.manager != 'none'
+        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+
+      - name: Check for component documentation directories
+        id: check-docs
+        run: |
+          echo "Checking for documentation directories..."
+          
+          # Create directories if they don't exist
+          mkdir -p network-medicine-extension
+          mkdir -p biomedgps-data  
+          mkdir -p biomedgps-models
+          mkdir -p biomedgps-explainer
+          mkdir -p biomedgps
+          
+          # Check which directories have actual documentation
+          for dir in network-medicine-extension biomedgps-data biomedgps-models biomedgps-explainer biomedgps; do
+            if [ -d "$dir" ] && [ "$(ls -A $dir 2>/dev/null)" ]; then
+              echo "✓ Found documentation in $dir/"
+            else
+              echo "⚠ No documentation found in $dir/, creating placeholder"
+              # Create a simple placeholder index.html
+              cat > "$dir/index.html" << EOF
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>$dir - Documentation Coming Soon</title>
+              <style>
+                  body { 
+                      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                      display: flex; 
+                      justify-content: center; 
+                      align-items: center; 
+                      height: 100vh; 
+                      margin: 0; 
+                      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+                      color: #1f2937;
+                  }
+                  .container { 
+                      text-align: center; 
+                      padding: 2rem;
+                      background: white;
+                      border-radius: 16px;
+                      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+                      max-width: 500px;
+                  }
+                  h1 { 
+                      color: #6366f1; 
+                      margin-bottom: 1rem;
+                      font-size: 2rem;
+                  }
+                  p { 
+                      color: #6b7280; 
+                      font-size: 1.1rem;
+                      margin-bottom: 2rem;
+                  }
+                  .back-btn {
+                      background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+                      color: white;
+                      padding: 0.75rem 2rem;
+                      border: none;
+                      border-radius: 50px;
+                      text-decoration: none;
+                      font-weight: 600;
+                      transition: transform 0.2s;
+                  }
+                  .back-btn:hover {
+                      transform: translateY(-2px);
+                  }
+              </style>
+          </head>
+          <body>
+              <div class="container">
+                  <h1>$dir</h1>
+                  <p>Documentation is being prepared and will be available soon.</p>
+                  <a href="../" class="back-btn">← Back to Home</a>
+              </div>
+          </body>
+          </html>
+          EOF
+            fi
+          done
+
+      - name: Build with Next.js
+        if: steps.detect-package-manager.outputs.manager != 'none'
+        run: ${{ steps.detect-package-manager.outputs.runner }} next build
+
+      - name: Static HTML export with Next.js
+        if: steps.detect-package-manager.outputs.manager != 'none'
+        run: ${{ steps.detect-package-manager.outputs.runner }} next export
+
+      - name: Prepare static files for deployment
+        run: |
+          # If we have a Next.js build, use it
+          if [ -d "out" ]; then
+            echo "Using Next.js build output"
+            cp -r out/* ./deploy/ || mkdir -p deploy && cp -r out/* ./deploy/
+          else
+            echo "Using static HTML files"
+            mkdir -p deploy
+            
+            # Copy main files
+            cp index.html deploy/
+            cp styles.css deploy/
+            cp script.js deploy/
+            
+            # Copy component directories
+            for dir in network-medicine-extension biomedgps-data biomedgps-models biomedgps-explainer biomedgps; do
+              if [ -d "$dir" ]; then
+                cp -r "$dir" deploy/
+              fi
+            done
+          fi
+          
+          # Ensure we have an index.html in the deploy directory
+          if [ ! -f "deploy/index.html" ]; then
+            cp index.html deploy/
+          fi
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./deploy
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # Notify other repositories about successful deployment
+  notify:
+    runs-on: ubuntu-latest
+    needs: [build, deploy]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - name: Notify deployment success
+        run: |
+          echo "Documentation successfully deployed!"
+          echo "Site URL: ${{ steps.deployment.outputs.page_url }}"
