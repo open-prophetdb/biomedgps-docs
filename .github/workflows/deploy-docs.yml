@@ -186,6 +186,7 @@ jobs:
             cp index.html deploy/
             cp styles.css deploy/
             cp script.js deploy/
+            cp -r images deploy/
             
             # Copy component directories
             for dir in network-medicine-extension biomedgps-data biomedgps-models biomedgps-explainer biomedgps; do
