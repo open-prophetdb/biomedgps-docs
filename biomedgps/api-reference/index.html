@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>API Reference | BioMedGPS Documentation</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="API Reference" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="BioMedGPS is a knowledge graph platform with graph neural networks for drug repurposing and disease mechanism discovery. This documentation provides comprehensive guides for users to understand and use the platform effectively." />
+<meta property="og:description" content="BioMedGPS is a knowledge graph platform with graph neural networks for drug repurposing and disease mechanism discovery. This documentation provides comprehensive guides for users to understand and use the platform effectively." />
+<link rel="canonical" href="/api-reference/" />
+<meta property="og:url" content="/api-reference/" />
+<meta property="og:site_name" content="BioMedGPS Documentation" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="API Reference" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"BioMedGPS is a knowledge graph platform with graph neural networks for drug repurposing and disease mechanism discovery. This documentation provides comprehensive guides for users to understand and use the platform effectively.","headline":"API Reference","url":"/api-reference/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="BioMedGPS Documentation" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">BioMedGPS Documentation</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/getting-started/">Getting Started</a><a class="page-link" href="/user-guide/">User Guide</a><a class="page-link" href="/features/">Features Overview</a><a class="page-link" href="/api-reference/">API Reference</a><a class="page-link" href="/faq/">Frequently Asked Questions</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">API Reference</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="api-reference">API Reference</h1>
+
+<p>BioMedGPS provides a comprehensive RESTful API that allows developers to programmatically access all platform functionality. The API is built using OpenAPI 3.0 specification and provides interactive documentation.</p>
+
+<h2 id="getting-started-with-the-api">Getting Started with the API</h2>
+
+<h3 id="base-url">Base URL</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://your-biomedgps-instance.com/api
+</code></pre></div></div>
+
+<p>For local development:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://localhost:8888
+</code></pre></div></div>
+
+<h3 id="authentication">Authentication</h3>
+<p>BioMedGPS uses JWT-based authentication. Include your token in the Authorization header:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-H</span> <span class="s2">"Authorization: Bearer YOUR_JWT_TOKEN"</span> <span class="se">\</span>
+     https://your-instance.com/api/entities
+</code></pre></div></div>
+
+<h3 id="openapi-documentation">OpenAPI Documentation</h3>
+<p>Interactive API documentation is available at:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://your-instance.com/docs
+</code></pre></div></div>
+
+<p>This provides:</p>
+<ul>
+  <li>Complete endpoint documentation</li>
+  <li>Request/response schemas</li>
+  <li>Interactive API testing</li>
+  <li>Code generation for multiple languages</li>
+</ul>
+
+<h2 id="core-api-endpoints">Core API Endpoints</h2>
+
+<h3 id="entities-api">Entities API</h3>
+
+<h4 id="search-entities">Search Entities</h4>
+<p>Find biological entities (genes, diseases, drugs, etc.) in the knowledge graph.</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">GET /entities?query={search_term}&amp;entity_type={type}&amp;limit={n}
+</span></code></pre></div></div>
+
+<p><strong>Parameters:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">query</code> (string): Search term or entity name</li>
+  <li><code class="language-plaintext highlighter-rouge">entity_type</code> (optional): Filter by entity type (gene, disease, drug, etc.)</li>
+  <li><code class="language-plaintext highlighter-rouge">limit</code> (optional): Maximum number of results (default: 20)</li>
+</ul>
+
+<p><strong>Example:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="s2">"http://localhost:8888/entities?query=alzheimer&amp;entity_type=disease&amp;limit=10"</span>
+</code></pre></div></div>
+
+<p><strong>Response:</strong></p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"entities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DOID:10652"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alzheimer's disease"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"entity_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"disease"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A tauopathy that is characterized by..."</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"synonyms"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"AD"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Alzheimer disease"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"mesh_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D000544"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"umls_cui"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C0002395"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h4 id="get-entity-details">Get Entity Details</h4>
+<p>Retrieve detailed information about a specific entity.</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">GET /entities/{entity_id}
+</span></code></pre></div></div>
+
+<p><strong>Example:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="s2">"http://localhost:8888/entities/DOID:10652"</span>
+</code></pre></div></div>
+
+<h3 id="relationships-api">Relationships API</h3>
+
+<h4 id="get-entity-relationships">Get Entity Relationships</h4>
+<p>Find relationships for a specific entity.</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">GET /entities/{entity_id}/relationships?relation_type={type}&amp;limit={n}
+</span></code></pre></div></div>
+
+<p><strong>Parameters:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">relation_type</code> (optional): Filter by relationship type</li>
+  <li><code class="language-plaintext highlighter-rouge">limit</code> (optional): Maximum number of relationships</li>
+</ul>
+
+<p><strong>Example:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="s2">"http://localhost:8888/entities/DOID:10652/relationships?relation_type=drug_treats_disease"</span>
+</code></pre></div></div>
+
+<h4 id="find-paths-between-entities">Find Paths Between Entities</h4>
+<p>Discover paths connecting two entities in the knowledge graph.</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">GET /paths?source={source_id}&amp;target={target_id}&amp;max_length={n}
+</span></code></pre></div></div>
+
+<p><strong>Example:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="s2">"http://localhost:8888/paths?source=DOID:10652&amp;target=DB00843&amp;max_length=3"</span>
+</code></pre></div></div>
+
+<h3 id="predictions-api">Predictions API</h3>
+
+<h4 id="drug-prediction">Drug Prediction</h4>
+<p>Predict drugs for a given disease or target.</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">POST /predictions/drugs
+</span></code></pre></div></div>
+
+<p><strong>Request Body:</strong></p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DOID:10652"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"entity_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"disease"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"graph_neural_network"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"threshold"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.7</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Response:</strong></p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"predictions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"drug_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB00843"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"drug_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Donepezil"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"score"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.85</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"confidence"</span><span class="p">:</span><span class="w"> </span><span class="s2">"high"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"evidence"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"clinical_trial"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NCT00000173"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Phase 3 trial for Alzheimer's disease"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"model_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v2.1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-15T10:30:00Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h4 id="target-prediction">Target Prediction</h4>
+<p>Predict therapeutic targets for diseases.</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">POST /predictions/targets
+</span></code></pre></div></div>
+
+<h4 id="biomarker-prediction">Biomarker Prediction</h4>
+<p>Identify potential biomarkers for diseases or conditions.</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">POST /predictions/biomarkers
+</span></code></pre></div></div>
+
+<h3 id="knowledge-graph-api">Knowledge Graph API</h3>
+
+<h4 id="subgraph-extraction">Subgraph Extraction</h4>
+<p>Extract a subgraph around entities of interest.</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">POST /subgraph
+</span></code></pre></div></div>
+
+<p><strong>Request Body:</strong></p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"entities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"DOID:10652"</span><span class="p">,</span><span class="w"> </span><span class="s2">"HGNC:620"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"max_distance"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"relationship_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"drug_treats_disease"</span><span class="p">,</span><span class="w"> </span><span class="s2">"gene_associated_with_disease"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"include_attributes"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h4 id="graph-statistics">Graph Statistics</h4>
+<p>Get statistics about the knowledge graph.</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">GET /graph/statistics
+</span></code></pre></div></div>
+
+<p><strong>Response:</strong></p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"total_entities"</span><span class="p">:</span><span class="w"> </span><span class="mi">125000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"total_relationships"</span><span class="p">:</span><span class="w"> </span><span class="mi">850000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"entity_types"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"gene"</span><span class="p">:</span><span class="w"> </span><span class="mi">25000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"disease"</span><span class="p">:</span><span class="w"> </span><span class="mi">15000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"drug"</span><span class="p">:</span><span class="w"> </span><span class="mi">8000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"protein"</span><span class="p">:</span><span class="w"> </span><span class="mi">20000</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"relationship_types"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"drug_treats_disease"</span><span class="p">:</span><span class="w"> </span><span class="mi">45000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"gene_associated_with_disease"</span><span class="p">:</span><span class="w"> </span><span class="mi">120000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"protein_protein_interaction"</span><span class="p">:</span><span class="w"> </span><span class="mi">200000</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"last_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-15T00:00:00Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="omics-data-api">Omics Data API</h3>
+
+<h4 id="upload-dataset">Upload Dataset</h4>
+<p>Upload omics data for analysis.</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">POST /omics/datasets
+Content-Type: multipart/form-data
+</span></code></pre></div></div>
+
+<p><strong>Form Data:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">file</code>: Data file (CSV, TSV, Excel)</li>
+  <li><code class="language-plaintext highlighter-rouge">dataset_name</code>: Name for the dataset</li>
+  <li><code class="language-plaintext highlighter-rouge">data_type</code>: Type of omics data (genomics, transcriptomics, etc.)</li>
+  <li><code class="language-plaintext highlighter-rouge">metadata</code>: JSON metadata about the dataset</li>
+</ul>
+
+<h4 id="list-datasets">List Datasets</h4>
+<p>Get available omics datasets.</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">GET /omics/datasets?owner={user_id}&amp;data_type={type}
+</span></code></pre></div></div>
+
+<h4 id="run-analysis">Run Analysis</h4>
+<p>Execute omics data analysis workflows.</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">POST /omics/analyses
+</span></code></pre></div></div>
+
+<p><strong>Request Body:</strong></p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"dataset_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dataset_123"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"analysis_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"differential_expression"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"comparison_groups"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"treatment"</span><span class="p">,</span><span class="w"> </span><span class="s2">"control"</span><span class="p">],</span><span class="w">
+    </span><span class="nl">"p_value_threshold"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fold_change_threshold"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="curation-api">Curation API</h3>
+
+<h4 id="custom-entities">Custom Entities</h4>
+<p>Add custom entities to personal knowledge graphs.</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">POST /curation/entities
+</span></code></pre></div></div>
+
+<p><strong>Request Body:</strong></p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom Gene X"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"entity_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gene"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A novel gene discovered in our lab"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"synonyms"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"GeneX"</span><span class="p">,</span><span class="w"> </span><span class="s2">"GENX"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"chromosome"</span><span class="p">:</span><span class="w"> </span><span class="s2">"chr1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"genomic_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345-67890"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h4 id="custom-relationships">Custom Relationships</h4>
+<p>Add custom relationships between entities.</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">POST /curation/relationships
+</span></code></pre></div></div>
+
+<h4 id="key-sentences">Key Sentences</h4>
+<p>Extract and curate key sentences from literature.</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">POST /curation/key-sentences
+</span></code></pre></div></div>
+
+<h3 id="chat-api">Chat API</h3>
+
+<h4 id="chat-completion">Chat Completion</h4>
+<p>Interact with AI models for question answering.</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">POST /chat/completions
+</span></code></pre></div></div>
+
+<p><strong>Request Body:</strong></p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gpt-3.5-turbo"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What genes are associated with Alzheimer's disease?"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"include_knowledge_graph"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"include_literature"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="data-models">Data Models</h2>
+
+<h3 id="entity-schema">Entity Schema</h3>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"entity_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"synonyms"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"string"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"datetime"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"datetime"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="relationship-schema">Relationship Schema</h3>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"source_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"target_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"relation_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"float"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"evidence"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="prediction-schema">Prediction Schema</h3>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"predicted_entity_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"prediction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"float"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"confidence"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"model_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"evidence"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"object"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"datetime"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="error-handling">Error Handling</h2>
+
+<h3 id="http-status-codes">HTTP Status Codes</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">200 OK</code>: Successful request</li>
+  <li><code class="language-plaintext highlighter-rouge">201 Created</code>: Resource created successfully</li>
+  <li><code class="language-plaintext highlighter-rouge">400 Bad Request</code>: Invalid request parameters</li>
+  <li><code class="language-plaintext highlighter-rouge">401 Unauthorized</code>: Authentication required</li>
+  <li><code class="language-plaintext highlighter-rouge">403 Forbidden</code>: Access denied</li>
+  <li><code class="language-plaintext highlighter-rouge">404 Not Found</code>: Resource not found</li>
+  <li><code class="language-plaintext highlighter-rouge">429 Too Many Requests</code>: Rate limit exceeded</li>
+  <li><code class="language-plaintext highlighter-rouge">500 Internal Server Error</code>: Server error</li>
+</ul>
+
+<h3 id="error-response-format">Error Response Format</h3>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VALIDATION_ERROR"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid entity type specified"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"field"</span><span class="p">:</span><span class="w"> </span><span class="s2">"entity_type"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"allowed_values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"gene"</span><span class="p">,</span><span class="w"> </span><span class="s2">"disease"</span><span class="p">,</span><span class="w"> </span><span class="s2">"drug"</span><span class="p">,</span><span class="w"> </span><span class="s2">"protein"</span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="rate-limiting">Rate Limiting</h2>
+
+<p>The API implements rate limiting to ensure fair usage:</p>
+
+<ul>
+  <li><strong>Authenticated users</strong>: 1000 requests per hour</li>
+  <li><strong>Anonymous users</strong>: 100 requests per hour</li>
+  <li><strong>Bulk operations</strong>: 10 requests per minute</li>
+</ul>
+
+<p>Rate limit headers are included in responses:</p>
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">X-RateLimit-Limit: 1000
+X-RateLimit-Remaining: 999
+X-RateLimit-Reset: 1640995200
+</span></code></pre></div></div>
+
+<h2 id="sdks-and-client-libraries">SDKs and Client Libraries</h2>
+
+<h3 id="python-sdk">Python SDK</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>biomedgps-python
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">biomedgps</span> <span class="kn">import</span> <span class="n">Client</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s">"your_api_key"</span><span class="p">)</span>
+<span class="n">entities</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">search_entities</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s">"alzheimer"</span><span class="p">,</span> <span class="n">entity_type</span><span class="o">=</span><span class="s">"disease"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="r-package">R Package</h3>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="s2">"biomedgpsR"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">library</span><span class="p">(</span><span class="n">biomedgpsR</span><span class="p">)</span><span class="w">
+</span><span class="n">client</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">biomedgps_client</span><span class="p">(</span><span class="n">api_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"your_api_key"</span><span class="p">)</span><span class="w">
+</span><span class="n">entities</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">search_entities</span><span class="p">(</span><span class="n">client</span><span class="p">,</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"alzheimer"</span><span class="p">,</span><span class="w"> </span><span class="n">entity_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"disease"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="javascriptnodejs">JavaScript/Node.js</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install </span>biomedgps-js
+</code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">BioMedGPS</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">biomedgps-js</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BioMedGPS</span><span class="p">({</span> <span class="na">apiKey</span><span class="p">:</span> <span class="dl">'</span><span class="s1">your_api_key</span><span class="dl">'</span> <span class="p">});</span>
+<span class="kd">const</span> <span class="nx">entities</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">client</span><span class="p">.</span><span class="nx">searchEntities</span><span class="p">({</span> 
+  <span class="na">query</span><span class="p">:</span> <span class="dl">'</span><span class="s1">alzheimer</span><span class="dl">'</span><span class="p">,</span> 
+  <span class="na">entityType</span><span class="p">:</span> <span class="dl">'</span><span class="s1">disease</span><span class="dl">'</span> 
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="examples-and-tutorials">Examples and Tutorials</h2>
+
+<h3 id="basic-entity-search">Basic Entity Search</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s">"http://localhost:8888/entities"</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">"query"</span><span class="p">:</span> <span class="s">"BRCA1"</span><span class="p">,</span> <span class="s">"entity_type"</span><span class="p">:</span> <span class="s">"gene"</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">'entities'</span><span class="p">])</span><span class="si">}</span><span class="s"> entities"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="drug-discovery-workflow">Drug Discovery Workflow</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 1. Find disease entity
+</span><span class="n">disease</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">search_entities</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s">"breast cancer"</span><span class="p">,</span> <span class="n">entity_type</span><span class="o">=</span><span class="s">"disease"</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># 2. Predict drug candidates
+</span><span class="n">predictions</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">predict_drugs</span><span class="p">(</span>
+    <span class="n">entity_id</span><span class="o">=</span><span class="n">disease</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span>
+    <span class="n">threshold</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">20</span>
+<span class="p">)</span>
+
+<span class="c1"># 3. Get detailed information for top candidates
+</span><span class="k">for</span> <span class="n">pred</span> <span class="ow">in</span> <span class="n">predictions</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>
+    <span class="n">drug_details</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">get_entity</span><span class="p">(</span><span class="n">pred</span><span class="p">[</span><span class="s">'drug_id'</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">drug_details</span><span class="p">[</span><span class="s">'name'</span><span class="p">]</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">pred</span><span class="p">[</span><span class="s">'score'</span><span class="p">]</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="pathway-analysis">Pathway Analysis</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Get genes associated with a disease
+</span><span class="n">disease_genes</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">get_relationships</span><span class="p">(</span>
+    <span class="n">entity_id</span><span class="o">=</span><span class="s">"DOID:1612"</span><span class="p">,</span>  <span class="c1"># breast cancer
+</span>    <span class="n">relation_type</span><span class="o">=</span><span class="s">"gene_associated_with_disease"</span>
+<span class="p">)</span>
+
+<span class="c1"># Extract subgraph for pathway analysis
+</span><span class="n">subgraph</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">extract_subgraph</span><span class="p">(</span>
+    <span class="n">entities</span><span class="o">=</span><span class="p">[</span><span class="n">gene</span><span class="p">[</span><span class="s">'target_id'</span><span class="p">]</span> <span class="k">for</span> <span class="n">gene</span> <span class="ow">in</span> <span class="n">disease_genes</span><span class="p">[:</span><span class="mi">50</span><span class="p">]],</span>
+    <span class="n">max_distance</span><span class="o">=</span><span class="mi">2</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="webhooks">Webhooks</h2>
+
+<p>Subscribe to real-time updates for data changes and analysis completions.</p>
+
+<h3 id="webhook-configuration">Webhook Configuration</h3>
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">POST /webhooks
+</span></code></pre></div></div>
+
+<p><strong>Request Body:</strong></p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-app.com/webhook"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"events"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"entity.created"</span><span class="p">,</span><span class="w"> </span><span class="s2">"analysis.completed"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook_secret"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="webhook-events">Webhook Events</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">entity.created</code>: New entity added</li>
+  <li><code class="language-plaintext highlighter-rouge">entity.updated</code>: Entity modified</li>
+  <li><code class="language-plaintext highlighter-rouge">relationship.created</code>: New relationship added</li>
+  <li><code class="language-plaintext highlighter-rouge">analysis.completed</code>: Omics analysis finished</li>
+  <li><code class="language-plaintext highlighter-rouge">prediction.completed</code>: Prediction job finished</li>
+</ul>
+
+<h2 id="support-and-resources">Support and Resources</h2>
+
+<ul>
+  <li><strong>Interactive API Documentation</strong>: <code class="language-plaintext highlighter-rouge">/docs</code> endpoint</li>
+  <li><strong>GitHub Repository</strong>: <a href="https://github.com/yjcyxky/biomedgps">https://github.com/yjcyxky/biomedgps</a></li>
+  <li><strong>Issue Tracker</strong>: <a href="https://github.com/yjcyxky/biomedgps/issues">GitHub Issues</a></li>
+  <li><strong>Community Forum</strong>: <a href="https://github.com/yjcyxky/biomedgps/discussions">Discussions</a></li>
+</ul>
+
+<p>For technical support, please create an issue on GitHub or contact the development team directly.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">BioMedGPS Documentation</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">BioMedGPS Documentation</li><li><a class="u-email" href="mailto:yjcyxky@163.com">yjcyxky@163.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/yjcyxky"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">yjcyxky</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>BioMedGPS is a knowledge graph platform with graph neural networks for drug repurposing and disease mechanism discovery. This documentation provides comprehensive guides for users to understand and use the platform effectively.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

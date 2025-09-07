@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Frequently Asked Questions | BioMedGPS Documentation</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Frequently Asked Questions" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="BioMedGPS is a knowledge graph platform with graph neural networks for drug repurposing and disease mechanism discovery. This documentation provides comprehensive guides for users to understand and use the platform effectively." />
+<meta property="og:description" content="BioMedGPS is a knowledge graph platform with graph neural networks for drug repurposing and disease mechanism discovery. This documentation provides comprehensive guides for users to understand and use the platform effectively." />
+<link rel="canonical" href="/faq/" />
+<meta property="og:url" content="/faq/" />
+<meta property="og:site_name" content="BioMedGPS Documentation" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Frequently Asked Questions" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"BioMedGPS is a knowledge graph platform with graph neural networks for drug repurposing and disease mechanism discovery. This documentation provides comprehensive guides for users to understand and use the platform effectively.","headline":"Frequently Asked Questions","url":"/faq/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="BioMedGPS Documentation" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">BioMedGPS Documentation</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/getting-started/">Getting Started</a><a class="page-link" href="/user-guide/">User Guide</a><a class="page-link" href="/features/">Features Overview</a><a class="page-link" href="/api-reference/">API Reference</a><a class="page-link" href="/faq/">Frequently Asked Questions</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Frequently Asked Questions</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="frequently-asked-questions">Frequently Asked Questions</h1>
+
+<p>Find answers to common questions about BioMedGPS. If you can’t find what you’re looking for, please check our <a href="https://github.com/yjcyxky/biomedgps/issues">GitHub Issues</a> or create a new issue.</p>
+
+<h2 id="general-questions">General Questions</h2>
+
+<h3 id="what-is-biomedgps">What is BioMedGPS?</h3>
+
+<p>BioMedGPS (Biomedical Graph-based Prediction System) is a comprehensive knowledge graph platform that combines biomedical data integration, graph neural networks, and interactive visualization for drug discovery, disease mechanism analysis, and biomedical knowledge exploration.</p>
+
+<h3 id="who-can-use-biomedgps">Who can use BioMedGPS?</h3>
+
+<p>BioMedGPS is designed for:</p>
+<ul>
+  <li><strong>Biomedical researchers</strong> exploring disease mechanisms and drug interactions</li>
+  <li><strong>Pharmaceutical scientists</strong> working on drug discovery and repurposing</li>
+  <li><strong>Bioinformaticians</strong> analyzing multi-omics data</li>
+  <li><strong>Clinical researchers</strong> investigating biomarkers and therapeutic targets</li>
+  <li><strong>Data scientists</strong> building biomedical AI applications</li>
+</ul>
+
+<h3 id="is-biomedgps-free-to-use">Is BioMedGPS free to use?</h3>
+
+<p>BioMedGPS is open-source software released under the GNU Affero General Public License v3.0. You can use, modify, and distribute it freely according to the license terms. However, some integrated services (like certain AI models) may require API keys or subscriptions.</p>
+
+<h3 id="what-data-sources-does-biomedgps-integrate">What data sources does BioMedGPS integrate?</h3>
+
+<p>BioMedGPS integrates data from multiple sources including:</p>
+<ul>
+  <li>DRKG (Drug Repurposing Knowledge Graph)</li>
+  <li>PubMed literature</li>
+  <li>UniProt protein database</li>
+  <li>KEGG pathways</li>
+  <li>Gene Ontology</li>
+  <li>ChEMBL bioactivity data</li>
+  <li>STRING protein interactions</li>
+  <li>DisGeNET disease-gene associations</li>
+</ul>
+
+<h2 id="technical-questions">Technical Questions</h2>
+
+<h3 id="what-are-the-system-requirements-for-running-biomedgps">What are the system requirements for running BioMedGPS?</h3>
+
+<p><strong>Minimum Requirements:</strong></p>
+<ul>
+  <li>8GB RAM</li>
+  <li>4 CPU cores</li>
+  <li>50GB available disk space</li>
+  <li>PostgreSQL 12+</li>
+  <li>Neo4j 4.0+</li>
+</ul>
+
+<p><strong>Recommended:</strong></p>
+<ul>
+  <li>16GB+ RAM</li>
+  <li>8+ CPU cores</li>
+  <li>SSD storage</li>
+  <li>Docker for easy deployment</li>
+</ul>
+
+<h3 id="can-i-run-biomedgps-on-cloud-platforms">Can I run BioMedGPS on cloud platforms?</h3>
+
+<p>Yes, BioMedGPS can be deployed on various cloud platforms:</p>
+<ul>
+  <li><strong>AWS</strong>: EC2 instances with RDS and managed Neo4j</li>
+  <li><strong>Google Cloud</strong>: Compute Engine with Cloud SQL</li>
+  <li><strong>Azure</strong>: Virtual machines with managed databases</li>
+  <li><strong>Docker</strong>: Containerized deployment on any platform</li>
+</ul>
+
+<h3 id="how-do-i-update-biomedgps-to-the-latest-version">How do I update BioMedGPS to the latest version?</h3>
+
+<p>For source installations:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin main
+make build-mac  <span class="c"># or build-linux</span>
+</code></pre></div></div>
+
+<p>For Docker deployments:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose pull
+docker-compose up <span class="nt">-d</span>
+</code></pre></div></div>
+
+<p>Always backup your data before updating and check the changelog for breaking changes.</p>
+
+<h2 id="data-and-import-questions">Data and Import Questions</h2>
+
+<h3 id="how-do-i-import-my-own-data-into-biomedgps">How do I import my own data into BioMedGPS?</h3>
+
+<p>You can import custom data through several methods:</p>
+
+<ol>
+  <li><strong>Web Interface</strong>: Use the Knowledge Curation pages to add entities and relationships manually</li>
+  <li><strong>Bulk Import</strong>: Use the CLI tool for large datasets:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>biomedgps-cli importdb <span class="nt">-f</span> your_data.tsv <span class="nt">-t</span> entity <span class="nt">-D</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>API</strong>: Programmatically import data using the REST API</li>
+  <li><strong>Direct Database</strong>: Insert data directly into PostgreSQL tables</li>
+</ol>
+
+<h3 id="what-file-formats-are-supported-for-data-import">What file formats are supported for data import?</h3>
+
+<ul>
+  <li><strong>Tabular Data</strong>: CSV, TSV, Excel (.xlsx, .xls)</li>
+  <li><strong>Bioinformatics</strong>: VCF, GFF, BED formats</li>
+  <li><strong>Structured Data</strong>: JSON, XML</li>
+  <li><strong>Database</strong>: Direct PostgreSQL connections</li>
+</ul>
+
+<h3 id="how-do-i-handle-large-datasets">How do I handle large datasets?</h3>
+
+<p>For large datasets (&gt;1M records):</p>
+<ol>
+  <li>Use batch processing with the CLI tool</li>
+  <li>Split large files into smaller chunks</li>
+  <li>Use database indexes for better performance</li>
+  <li>Consider using background processing for imports</li>
+  <li>Monitor system resources during import</li>
+</ol>
+
+<h3 id="can-i-integrate-proprietary-or-confidential-data">Can I integrate proprietary or confidential data?</h3>
+
+<p>Yes, you can integrate proprietary data while maintaining confidentiality:</p>
+<ul>
+  <li>Use local deployment to keep data on-premises</li>
+  <li>Implement custom access controls</li>
+  <li>Use data anonymization features</li>
+  <li>Set up private user groups and permissions</li>
+  <li>Consider encryption for sensitive data</li>
+</ul>
+
+<h2 id="usage-and-features">Usage and Features</h2>
+
+<h3 id="how-do-i-search-for-entities-in-the-knowledge-graph">How do I search for entities in the knowledge graph?</h3>
+
+<ol>
+  <li><strong>Simple Search</strong>: Use the main search bar on any page</li>
+  <li><strong>Advanced Search</strong>: Use filters for entity type, data source, etc.</li>
+  <li><strong>API Search</strong>: Use the <code class="language-plaintext highlighter-rouge">/entities</code> endpoint programmatically</li>
+  <li><strong>Graph Navigation</strong>: Start from one entity and explore neighbors</li>
+  <li><strong>Similarity Search</strong>: Find entities similar to your query using embeddings</li>
+</ol>
+
+<h3 id="what-types-of-predictions-can-biomedgps-make">What types of predictions can BioMedGPS make?</h3>
+
+<p>BioMedGPS can predict:</p>
+<ul>
+  <li><strong>Drug Repurposing</strong>: Existing drugs for new indications</li>
+  <li><strong>Target Discovery</strong>: Therapeutic targets for diseases</li>
+  <li><strong>Biomarkers</strong>: Diagnostic and prognostic markers</li>
+  <li><strong>Drug-Drug Interactions</strong>: Potential adverse interactions</li>
+  <li><strong>Side Effects</strong>: Adverse reactions for drug combinations</li>
+  <li><strong>Pathway Analysis</strong>: Affected biological pathways</li>
+</ul>
+
+<h3 id="how-accurate-are-the-predictions">How accurate are the predictions?</h3>
+
+<p>Prediction accuracy varies by model and data type:</p>
+<ul>
+  <li><strong>Drug Repurposing</strong>: ~70-85% precision for top predictions</li>
+  <li><strong>Target Discovery</strong>: ~60-75% precision depending on disease</li>
+  <li><strong>Biomarkers</strong>: Validation required for clinical use</li>
+  <li><strong>Side Effects</strong>: Used for hypothesis generation</li>
+</ul>
+
+<p>Always validate predictions experimentally and check confidence scores.</p>
+
+<h3 id="can-i-customize-the-prediction-models">Can I customize the prediction models?</h3>
+
+<p>Yes, several customization options are available:</p>
+<ul>
+  <li>Adjust prediction thresholds</li>
+  <li>Select specific model versions</li>
+  <li>Train models on custom datasets</li>
+  <li>Use ensemble methods for better accuracy</li>
+  <li>Implement custom scoring functions</li>
+</ul>
+
+<h3 id="how-do-i-visualize-complex-networks">How do I visualize complex networks?</h3>
+
+<p>BioMedGPS provides multiple visualization options:</p>
+<ul>
+  <li><strong>Interactive Graphs</strong>: Force-directed layouts with zooming/panning</li>
+  <li><strong>Hierarchical Views</strong>: Tree-like structures for pathways</li>
+  <li><strong>Circular Layouts</strong>: For symmetrical network views</li>
+  <li><strong>Multi-layer</strong>: Separate different relationship types</li>
+  <li><strong>Custom Filtering</strong>: Show/hide specific node or edge types</li>
+</ul>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<h3 id="common-installation-issues">Common Installation Issues</h3>
+
+<p><strong>Database Connection Errors</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: Connection refused (PostgreSQL/Neo4j)
+</code></pre></div></div>
+<p><strong>Solution:</strong></p>
+<ol>
+  <li>Verify databases are running: <code class="language-plaintext highlighter-rouge">docker ps</code></li>
+  <li>Check connection strings in environment variables</li>
+  <li>Ensure firewall allows connections</li>
+  <li>Verify credentials and database names</li>
+</ol>
+
+<p><strong>Build Failures</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: cargo build failed
+</code></pre></div></div>
+<p><strong>Solution:</strong></p>
+<ol>
+  <li>Update Rust: <code class="language-plaintext highlighter-rouge">rustup update</code></li>
+  <li>Clear build cache: <code class="language-plaintext highlighter-rouge">cargo clean</code></li>
+  <li>Check system dependencies</li>
+  <li>Review error logs for specific issues</li>
+</ol>
+
+<p><strong>Frontend Issues</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: Module not found
+</code></pre></div></div>
+<p><strong>Solution:</strong></p>
+<ol>
+  <li>Verify Node.js version (must be 16.13.1)</li>
+  <li>Clear cache: <code class="language-plaintext highlighter-rouge">yarn cache clean</code></li>
+  <li>Reinstall dependencies: <code class="language-plaintext highlighter-rouge">rm -rf node_modules &amp;&amp; yarn install</code></li>
+  <li>Check for conflicting global packages</li>
+</ol>
+
+<h3 id="performance-issues">Performance Issues</h3>
+
+<p><strong>Slow Query Performance</strong></p>
+<ul>
+  <li>Add database indexes for frequently queried fields</li>
+  <li>Use query pagination for large result sets</li>
+  <li>Optimize graph traversal depth</li>
+  <li>Consider caching for repeated queries</li>
+  <li>Monitor database performance metrics</li>
+</ul>
+
+<p><strong>High Memory Usage</strong></p>
+<ul>
+  <li>Increase available RAM</li>
+  <li>Optimize graph loading strategies</li>
+  <li>Use streaming for large datasets</li>
+  <li>Implement garbage collection tuning</li>
+  <li>Monitor memory usage patterns</li>
+</ul>
+
+<p><strong>Slow Predictions</strong></p>
+<ul>
+  <li>Use GPU acceleration if available</li>
+  <li>Reduce batch sizes for memory constraints</li>
+  <li>Cache model embeddings</li>
+  <li>Use faster model variants</li>
+  <li>Consider distributed computing</li>
+</ul>
+
+<h3 id="common-usage-issues">Common Usage Issues</h3>
+
+<p><strong>Authentication Problems</strong></p>
+<ul>
+  <li>Check Auth0 configuration</li>
+  <li>Verify client ID and domain settings</li>
+  <li>Clear browser cookies and cache</li>
+  <li>Check network connectivity</li>
+  <li>Review CORS settings</li>
+</ul>
+
+<p><strong>Data Import Failures</strong></p>
+<ul>
+  <li>Validate file formats and encoding</li>
+  <li>Check column headers and data types</li>
+  <li>Verify entity IDs and relationships</li>
+  <li>Monitor import logs for errors</li>
+  <li>Use smaller batch sizes</li>
+</ul>
+
+<p><strong>Visualization Problems</strong></p>
+<ul>
+  <li>Update browser to latest version</li>
+  <li>Clear browser cache</li>
+  <li>Disable browser extensions</li>
+  <li>Check WebGL support</li>
+  <li>Try different layout algorithms</li>
+</ul>
+
+<h2 id="advanced-topics">Advanced Topics</h2>
+
+<h3 id="how-do-i-set-up-high-availability">How do I set up high availability?</h3>
+
+<p>For production deployments:</p>
+<ol>
+  <li>Use database clustering (PostgreSQL HA, Neo4j Causal Cluster)</li>
+  <li>Implement load balancing with multiple application instances</li>
+  <li>Set up automated backups and disaster recovery</li>
+  <li>Monitor system health and performance</li>
+  <li>Use container orchestration (Kubernetes, Docker Swarm)</li>
+</ol>
+
+<h3 id="can-i-extend-biomedgps-with-custom-plugins">Can I extend BioMedGPS with custom plugins?</h3>
+
+<p>Yes, BioMedGPS supports extensions through:</p>
+<ul>
+  <li><strong>API Integration</strong>: Build applications using the REST API</li>
+  <li><strong>Custom Models</strong>: Implement new prediction algorithms</li>
+  <li><strong>Data Connectors</strong>: Add support for new data sources</li>
+  <li><strong>Visualization Plugins</strong>: Create custom graph layouts</li>
+  <li><strong>Workflow Integration</strong>: Connect with external tools</li>
+</ul>
+
+<h3 id="how-do-i-contribute-to-biomedgps-development">How do I contribute to BioMedGPS development?</h3>
+
+<p>We welcome contributions! Here’s how to get started:</p>
+<ol>
+  <li>Fork the repository on GitHub</li>
+  <li>Set up development environment</li>
+  <li>Review open issues and feature requests</li>
+  <li>Submit pull requests with improvements</li>
+  <li>Help with documentation and testing</li>
+</ol>
+
+<h3 id="how-do-i-cite-biomedgps-in-publications">How do I cite BioMedGPS in publications?</h3>
+
+<p>When using BioMedGPS in research, please cite:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>BioMedGPS: A knowledge graph platform for biomedical discovery
+GitHub repository: https://github.com/yjcyxky/biomedgps
+</code></pre></div></div>
+
+<p>Include the version number and any specific features you used.</p>
+
+<h2 id="getting-more-help">Getting More Help</h2>
+
+<h3 id="documentation-resources">Documentation Resources</h3>
+<ul>
+  <li><strong>User Guide</strong>: Comprehensive feature documentation</li>
+  <li><strong>API Reference</strong>: Technical documentation for developers</li>
+  <li><strong>Video Tutorials</strong>: Step-by-step walkthroughs</li>
+  <li><strong>GitHub Wiki</strong>: Additional technical notes</li>
+</ul>
+
+<h3 id="community-support">Community Support</h3>
+<ul>
+  <li><strong>GitHub Discussions</strong>: General questions and ideas</li>
+  <li><strong>GitHub Issues</strong>: Bug reports and feature requests</li>
+  <li><strong>Stack Overflow</strong>: Tag questions with <code class="language-plaintext highlighter-rouge">biomedgps</code></li>
+  <li><strong>Twitter</strong>: Follow @biomedgps for updates</li>
+</ul>
+
+<h3 id="professional-support">Professional Support</h3>
+<p>For enterprise deployments or custom development:</p>
+<ul>
+  <li>Commercial support options available</li>
+  <li>Consulting services for large-scale deployments</li>
+  <li>Custom feature development</li>
+  <li>Training and workshops</li>
+</ul>
+
+<h3 id="reporting-bugs">Reporting Bugs</h3>
+
+<p>When reporting bugs, please include:</p>
+<ol>
+  <li>BioMedGPS version number</li>
+  <li>Operating system and browser</li>
+  <li>Steps to reproduce the issue</li>
+  <li>Error messages and logs</li>
+  <li>Screenshots if applicable</li>
+</ol>
+
+<p>Use the <a href="https://github.com/yjcyxky/biomedgps/issues/new">GitHub issue template</a> for bug reports.</p>
+
+<hr />
+
+<p><strong>Still have questions?</strong> Don’t hesitate to reach out through our GitHub repository or community channels. The BioMedGPS team and community are here to help!</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">BioMedGPS Documentation</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">BioMedGPS Documentation</li><li><a class="u-email" href="mailto:yjcyxky@163.com">yjcyxky@163.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/yjcyxky"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">yjcyxky</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>BioMedGPS is a knowledge graph platform with graph neural networks for drug repurposing and disease mechanism discovery. This documentation provides comprehensive guides for users to understand and use the platform effectively.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Getting Started | BioMedGPS Documentation</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Getting Started" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="BioMedGPS is a knowledge graph platform with graph neural networks for drug repurposing and disease mechanism discovery. This documentation provides comprehensive guides for users to understand and use the platform effectively." />
+<meta property="og:description" content="BioMedGPS is a knowledge graph platform with graph neural networks for drug repurposing and disease mechanism discovery. This documentation provides comprehensive guides for users to understand and use the platform effectively." />
+<link rel="canonical" href="/getting-started/" />
+<meta property="og:url" content="/getting-started/" />
+<meta property="og:site_name" content="BioMedGPS Documentation" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Getting Started" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"BioMedGPS is a knowledge graph platform with graph neural networks for drug repurposing and disease mechanism discovery. This documentation provides comprehensive guides for users to understand and use the platform effectively.","headline":"Getting Started","url":"/getting-started/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="BioMedGPS Documentation" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">BioMedGPS Documentation</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/getting-started/">Getting Started</a><a class="page-link" href="/user-guide/">User Guide</a><a class="page-link" href="/features/">Features Overview</a><a class="page-link" href="/api-reference/">API Reference</a><a class="page-link" href="/faq/">Frequently Asked Questions</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Getting Started</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="getting-started-with-biomedgps">Getting Started with BioMedGPS</h1>
+
+<p>This guide will help you get up and running with BioMedGPS quickly. Whether you’re a researcher looking to explore biomedical knowledge or a developer wanting to integrate with our platform, this page covers the essentials.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<h3 id="for-users-web-interface">For Users (Web Interface)</h3>
+<ul>
+  <li>A modern web browser (Chrome, Firefox, Safari, or Edge)</li>
+  <li>Internet connection</li>
+  <li>(Optional) Auth0 account for advanced features</li>
+</ul>
+
+<h3 id="for-developers-local-installation">For Developers (Local Installation)</h3>
+<ul>
+  <li><strong>Backend Requirements:</strong>
+    <ul>
+      <li>Rust (latest stable version)</li>
+      <li>PostgreSQL (12+ recommended)</li>
+      <li>Neo4j (4.0+ recommended)</li>
+      <li>Docker (optional, for easy database setup)</li>
+    </ul>
+  </li>
+  <li><strong>Frontend Requirements:</strong>
+    <ul>
+      <li>Node.js (version 16.13.1)</li>
+      <li>Yarn package manager</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="quick-start-web-interface">Quick Start (Web Interface)</h2>
+
+<p>If you just want to use BioMedGPS without installing anything locally:</p>
+
+<ol>
+  <li><strong>Visit the Platform</strong>: Navigate to your BioMedGPS instance URL</li>
+  <li><strong>Create an Account</strong>: Sign up using Auth0 authentication</li>
+  <li><strong>Explore the Dashboard</strong>: Start with the main dashboard to get familiar with available features</li>
+  <li><strong>Try the Knowledge Graph</strong>: Search for a disease or drug to see interactive visualizations</li>
+</ol>
+
+<h2 id="local-installation">Local Installation</h2>
+
+<h3 id="step-1-set-up-databases">Step 1: Set up Databases</h3>
+
+<p>The easiest way is to use Docker:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Clone the repository</span>
+git clone https://github.com/yjcyxky/biomedgps.git
+<span class="nb">cd </span>biomedgps
+
+<span class="c"># Start PostgreSQL and Neo4j with Docker</span>
+<span class="nb">mkdir </span>biomedgps <span class="o">&amp;&amp;</span> <span class="nb">cd </span>biomedgps
+wget <span class="nt">-O</span> docker-compose.yml https://raw.githubusercontent.com/biomedgps/biomedgps/master/docker-compose.yml
+docker-compose up <span class="nt">-d</span>
+</code></pre></div></div>
+
+<h3 id="step-2-install-and-build-backend">Step 2: Install and Build Backend</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Rust if you haven't already</span>
+curl <span class="nt">--proto</span> <span class="s1">'=https'</span> <span class="nt">--tlsv1</span>.2 <span class="nt">-sSf</span> https://sh.rustup.rs | sh
+
+<span class="c"># Build the backend</span>
+make build-mac  <span class="c"># For macOS</span>
+<span class="c"># or</span>
+make build-linux  <span class="c"># For Linux</span>
+</code></pre></div></div>
+
+<h3 id="step-3-initialize-database">Step 3: Initialize Database</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Set environment variables</span>
+<span class="nb">export </span><span class="nv">DATABASE_URL</span><span class="o">=</span>postgres://postgres:password@localhost:5432/test_biomedgps
+<span class="nb">export </span><span class="nv">NEO4J_URL</span><span class="o">=</span>neo4j://neo4j:password@localhost:7687
+
+<span class="c"># Initialize the database schema</span>
+biomedgps-cli initdb
+
+<span class="c"># Import sample data (optional)</span>
+biomedgps-cli importdb <span class="nt">-f</span> /data/entity.tsv <span class="nt">-t</span> entity <span class="nt">-D</span>
+biomedgps-cli importdb <span class="nt">-f</span> /data/relation.tsv <span class="nt">-t</span> relation <span class="nt">-D</span>
+</code></pre></div></div>
+
+<h3 id="step-4-set-up-frontend">Step 4: Set up Frontend</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>studio
+
+<span class="c"># Install dependencies</span>
+yarn <span class="nb">install</span>
+
+<span class="c"># Configure Auth0 (replace with your credentials)</span>
+<span class="c"># Edit studio/src/app.tsx and update auth0_config</span>
+
+<span class="c"># Start development server</span>
+yarn start:local-dev
+</code></pre></div></div>
+
+<h3 id="step-5-start-the-backend-server">Step 5: Start the Backend Server</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Start the server with API and UI</span>
+<span class="nb">export </span><span class="nv">DATABASE_URL</span><span class="o">=</span>postgres://postgres:password@localhost:5432/test_biomedgps
+<span class="nb">export </span><span class="nv">NEO4J_URL</span><span class="o">=</span>neo4j://neo4j:password@localhost:7687
+
+biomedgps <span class="nt">-H</span> 0.0.0.0 <span class="nt">-p</span> 8888 <span class="nt">--openapi</span> <span class="nt">--ui</span>
+</code></pre></div></div>
+
+<h2 id="first-steps-after-installation">First Steps After Installation</h2>
+
+<h3 id="1-access-the-platform">1. Access the Platform</h3>
+<ul>
+  <li>Open your web browser</li>
+  <li>Navigate to <code class="language-plaintext highlighter-rouge">http://localhost:8888</code> (or your configured URL)</li>
+  <li>Log in with your Auth0 credentials</li>
+</ul>
+
+<h3 id="2-explore-the-dashboard">2. Explore the Dashboard</h3>
+<p>The dashboard provides an overview of:</p>
+<ul>
+  <li>Knowledge graph statistics</li>
+  <li>Available datasets</li>
+  <li>Recent activity</li>
+  <li>Quick access to main features</li>
+</ul>
+
+<h3 id="3-try-key-features">3. Try Key Features</h3>
+
+<h4 id="knowledge-graph-exploration">Knowledge Graph Exploration</h4>
+<ol>
+  <li>Go to <strong>Predict &amp; Explain Findings</strong> → <strong>Explain Your Results</strong></li>
+  <li>Search for a disease (e.g., “Alzheimer’s disease”)</li>
+  <li>Explore related genes, drugs, and pathways in the interactive graph</li>
+</ol>
+
+<h4 id="drug-prediction">Drug Prediction</h4>
+<ol>
+  <li>Navigate to <strong>Predict &amp; Explain Findings</strong> → <strong>Predict Drugs/Targets</strong></li>
+  <li>Enter a disease or gene of interest</li>
+  <li>Run predictions to discover potential therapeutic targets</li>
+</ol>
+
+<h4 id="omics-data-analysis">Omics Data Analysis</h4>
+<ol>
+  <li>Go to <strong>Analyze Omics Data</strong></li>
+  <li>Upload your data or use sample datasets</li>
+  <li>Run statistical analysis workflows</li>
+</ol>
+
+<h2 id="configuration-options">Configuration Options</h2>
+
+<h3 id="environment-variables">Environment Variables</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">DATABASE_URL</code></td>
+      <td>PostgreSQL connection string</td>
+      <td><code class="language-plaintext highlighter-rouge">postgres://user:pass@host:port/dbname</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">NEO4J_URL</code></td>
+      <td>Neo4j connection string</td>
+      <td><code class="language-plaintext highlighter-rouge">neo4j://user:pass@host:port</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">AUTH0_CLIENT_ID</code></td>
+      <td>Auth0 application client ID</td>
+      <td><code class="language-plaintext highlighter-rouge">your-auth0-client-id</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">AUTH0_DOMAIN</code></td>
+      <td>Auth0 domain</td>
+      <td><code class="language-plaintext highlighter-rouge">your-domain.auth0.com</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="server-options">Server Options</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>biomedgps <span class="nt">--help</span>
+</code></pre></div></div>
+
+<p>Common options:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-H, --host</code>: Set host address (127.0.0.1 or 0.0.0.0)</li>
+  <li><code class="language-plaintext highlighter-rouge">-p, --port</code>: Set port number (default: 3000)</li>
+  <li><code class="language-plaintext highlighter-rouge">--openapi</code>: Enable OpenAPI documentation</li>
+  <li><code class="language-plaintext highlighter-rouge">--ui</code>: Enable web UI</li>
+  <li><code class="language-plaintext highlighter-rouge">--debug</code>: Enable debug mode</li>
+</ul>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<h3 id="common-issues">Common Issues</h3>
+
+<p><strong>Database Connection Failed</strong></p>
+<ul>
+  <li>Verify PostgreSQL/Neo4j are running</li>
+  <li>Check connection strings in environment variables</li>
+  <li>Ensure databases are initialized</li>
+</ul>
+
+<p><strong>Frontend Build Errors</strong></p>
+<ul>
+  <li>Verify Node.js version (must be 16.13.1)</li>
+  <li>Clear yarn cache: <code class="language-plaintext highlighter-rouge">yarn cache clean</code></li>
+  <li>Delete node_modules and reinstall: <code class="language-plaintext highlighter-rouge">rm -rf node_modules &amp;&amp; yarn install</code></li>
+</ul>
+
+<p><strong>Auth0 Configuration Issues</strong></p>
+<ul>
+  <li>Check client ID and domain in configuration</li>
+  <li>Verify callback URLs in Auth0 dashboard</li>
+  <li>Ensure HTTPS is used in production</li>
+</ul>
+
+<h3 id="getting-help">Getting Help</h3>
+
+<ul>
+  <li>Check our <a href="faq.html">FAQ</a> for common questions</li>
+  <li>Visit <a href="https://github.com/yjcyxky/biomedgps/issues">GitHub Issues</a> to report bugs</li>
+  <li>Review the <a href="user-guide.html">User Guide</a> for detailed feature documentation</li>
+</ul>
+
+<h2 id="next-steps">Next Steps</h2>
+
+<p>Now that you have BioMedGPS running:</p>
+
+<ol>
+  <li><strong>Read the <a href="user-guide.html">User Guide</a></strong> - Learn about all features in detail</li>
+  <li><strong>Explore <a href="features.html">Features</a></strong> - Understand what BioMedGPS can do</li>
+  <li><strong>Check the <a href="api-reference.html">API Reference</a></strong> - For developers building integrations</li>
+  <li><strong>Join the community</strong> - Contribute to the project on GitHub</li>
+</ol>
+
+<p>Welcome to BioMedGPS! We’re excited to see what discoveries you’ll make with our platform.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">BioMedGPS Documentation</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">BioMedGPS Documentation</li><li><a class="u-email" href="mailto:yjcyxky@163.com">yjcyxky@163.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/yjcyxky"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">yjcyxky</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>BioMedGPS is a knowledge graph platform with graph neural networks for drug repurposing and disease mechanism discovery. This documentation provides comprehensive guides for users to understand and use the platform effectively.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

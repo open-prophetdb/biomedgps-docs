@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Knowledge Graph Exploration | BioMedGPS Documentation</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Knowledge Graph Exploration" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Learn how to navigate and explore the BioMedGPS knowledge graph" />
+<meta property="og:description" content="Learn how to navigate and explore the BioMedGPS knowledge graph" />
+<link rel="canonical" href="/guides/knowledge-graph-exploration/" />
+<meta property="og:url" content="/guides/knowledge-graph-exploration/" />
+<meta property="og:site_name" content="BioMedGPS Documentation" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-09-07T20:56:46+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Knowledge Graph Exploration" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-09-07T20:56:46+00:00","datePublished":"2025-09-07T20:56:46+00:00","description":"Learn how to navigate and explore the BioMedGPS knowledge graph","headline":"Knowledge Graph Exploration","mainEntityOfPage":{"@type":"WebPage","@id":"/guides/knowledge-graph-exploration/"},"url":"/guides/knowledge-graph-exploration/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="BioMedGPS Documentation" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">BioMedGPS Documentation</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/getting-started/">Getting Started</a><a class="page-link" href="/user-guide/">User Guide</a><a class="page-link" href="/features/">Features Overview</a><a class="page-link" href="/api-reference/">API Reference</a><a class="page-link" href="/faq/">Frequently Asked Questions</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Knowledge Graph Exploration</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="knowledge-graph-exploration-guide">Knowledge Graph Exploration Guide</h1>
+
+<p>The knowledge graph is the core of BioMedGPS, containing millions of biomedical entities and their relationships. This guide will help you effectively explore and navigate this rich resource.</p>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<h3 id="understanding-the-graph-structure">Understanding the Graph Structure</h3>
+
+<p>The BioMedGPS knowledge graph contains several types of entities:</p>
+<ul>
+  <li><strong>Genes</strong>: Human genes and their variants</li>
+  <li><strong>Diseases</strong>: Medical conditions and disorders</li>
+  <li><strong>Drugs</strong>: Pharmaceutical compounds and treatments</li>
+  <li><strong>Proteins</strong>: Protein sequences and structures</li>
+  <li><strong>Pathways</strong>: Biological pathways and processes</li>
+  <li><strong>Publications</strong>: Scientific literature and evidence</li>
+</ul>
+
+<h3 id="basic-navigation">Basic Navigation</h3>
+
+<ol>
+  <li><strong>Start with Search</strong>: Use the main search bar to find entities</li>
+  <li><strong>Explore Connections</strong>: Click on nodes to see their relationships</li>
+  <li><strong>Use Filters</strong>: Filter by entity type or relationship type</li>
+  <li><strong>Adjust Layout</strong>: Try different visualization layouts</li>
+</ol>
+
+<h2 id="search-strategies">Search Strategies</h2>
+
+<h3 id="simple-search">Simple Search</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>alzheimer disease
+BRCA1
+aspirin
+</code></pre></div></div>
+
+<h3 id="advanced-search">Advanced Search</h3>
+<ul>
+  <li><strong>Exact Match</strong>: Use quotes for exact phrases: “Alzheimer’s disease”</li>
+  <li><strong>Entity Type Filter</strong>: Specify entity types: <code class="language-plaintext highlighter-rouge">gene:BRCA1</code></li>
+  <li><strong>Wildcard Search</strong>: Use * for partial matches: <code class="language-plaintext highlighter-rouge">alzh*</code></li>
+</ul>
+
+<h3 id="search-tips">Search Tips</h3>
+<ul>
+  <li>Use synonyms and alternative names</li>
+  <li>Try different spellings (American vs British)</li>
+  <li>Include common abbreviations</li>
+  <li>Search by database IDs (e.g., DOID:10652)</li>
+</ul>
+
+<h2 id="graph-visualization">Graph Visualization</h2>
+
+<h3 id="interactive-features">Interactive Features</h3>
+<ul>
+  <li><strong>Zoom</strong>: Mouse wheel or pinch gestures</li>
+  <li><strong>Pan</strong>: Click and drag to move around</li>
+  <li><strong>Select</strong>: Click nodes to see details</li>
+  <li><strong>Multi-select</strong>: Hold Ctrl/Cmd and click multiple nodes</li>
+</ul>
+
+<h3 id="layout-options">Layout Options</h3>
+<ul>
+  <li><strong>Force-directed</strong>: Natural clustering of related entities</li>
+  <li><strong>Circular</strong>: Entities arranged in a circle</li>
+  <li><strong>Hierarchical</strong>: Tree-like structure for pathways</li>
+  <li><strong>Grid</strong>: Organized in rows and columns</li>
+</ul>
+
+<h3 id="customization">Customization</h3>
+<ul>
+  <li><strong>Color Coding</strong>: Different colors for entity types</li>
+  <li><strong>Node Size</strong>: Reflects importance or degree</li>
+  <li><strong>Edge Thickness</strong>: Relationship strength or confidence</li>
+  <li><strong>Labels</strong>: Show/hide entity names</li>
+</ul>
+
+<h2 id="exploring-relationships">Exploring Relationships</h2>
+
+<h3 id="relationship-types">Relationship Types</h3>
+<ul>
+  <li><strong>Gene-Disease</strong>: <code class="language-plaintext highlighter-rouge">gene_associated_with_disease</code></li>
+  <li><strong>Drug-Disease</strong>: <code class="language-plaintext highlighter-rouge">drug_treats_disease</code></li>
+  <li><strong>Protein-Protein</strong>: <code class="language-plaintext highlighter-rouge">protein_protein_interaction</code></li>
+  <li><strong>Drug-Target</strong>: <code class="language-plaintext highlighter-rouge">drug_targets_protein</code></li>
+  <li><strong>Pathway</strong>: <code class="language-plaintext highlighter-rouge">gene_participates_in_pathway</code></li>
+</ul>
+
+<h3 id="finding-connections">Finding Connections</h3>
+<ol>
+  <li>Select your starting entity</li>
+  <li>Choose relationship types to explore</li>
+  <li>Set maximum distance (1-3 hops recommended)</li>
+  <li>Filter by confidence scores</li>
+</ol>
+
+<h3 id="path-discovery">Path Discovery</h3>
+<p>Find paths between any two entities:</p>
+<ol>
+  <li>Select source entity (e.g., a disease)</li>
+  <li>Select target entity (e.g., a drug)</li>
+  <li>Set maximum path length</li>
+  <li>Review discovered pathways</li>
+</ol>
+
+<h2 id="practical-examples">Practical Examples</h2>
+
+<h3 id="example-1-drug-discovery-for-alzheimers-disease">Example 1: Drug Discovery for Alzheimer’s Disease</h3>
+
+<ol>
+  <li><strong>Search for Disease</strong>: “Alzheimer’s disease”</li>
+  <li><strong>Explore Associated Genes</strong>: Look for <code class="language-plaintext highlighter-rouge">gene_associated_with_disease</code> relationships</li>
+  <li><strong>Find Drug Targets</strong>: Check which genes are targeted by existing drugs</li>
+  <li><strong>Identify Candidates</strong>: Look for drugs targeting multiple Alzheimer’s genes</li>
+  <li><strong>Validate Evidence</strong>: Check publication support and clinical trials</li>
+</ol>
+
+<h3 id="example-2-understanding-gene-function">Example 2: Understanding Gene Function</h3>
+
+<ol>
+  <li><strong>Search for Gene</strong>: “BRCA1”</li>
+  <li><strong>Check Protein Products</strong>: Follow <code class="language-plaintext highlighter-rouge">gene_codes_for_protein</code> relationships</li>
+  <li><strong>Explore Pathways</strong>: Find <code class="language-plaintext highlighter-rouge">participates_in_pathway</code> connections</li>
+  <li><strong>Disease Associations</strong>: Review <code class="language-plaintext highlighter-rouge">gene_associated_with_disease</code> links</li>
+  <li><strong>Drug Interactions</strong>: Check for targeting drugs</li>
+</ol>
+
+<h3 id="example-3-pathway-analysis">Example 3: Pathway Analysis</h3>
+
+<ol>
+  <li><strong>Start with Pathway</strong>: Search for specific pathway (e.g., “p53 signaling”)</li>
+  <li><strong>Identify Components</strong>: Find all genes and proteins in pathway</li>
+  <li><strong>Disease Context</strong>: Check which diseases affect this pathway</li>
+  <li><strong>Therapeutic Targets</strong>: Look for druggable targets in pathway</li>
+  <li><strong>Cross-talk</strong>: Find connections to other pathways</li>
+</ol>
+
+<h2 id="advanced-features">Advanced Features</h2>
+
+<h3 id="subgraph-extraction">Subgraph Extraction</h3>
+<p>Create focused views of specific areas:</p>
+<ol>
+  <li>Select entities of interest</li>
+  <li>Set neighborhood distance</li>
+  <li>Apply filters for entity/relationship types</li>
+  <li>Save or export the subgraph</li>
+</ol>
+
+<h3 id="similarity-search">Similarity Search</h3>
+<p>Find entities similar to your query:</p>
+<ul>
+  <li>Based on graph embeddings</li>
+  <li>Structural similarity in the graph</li>
+  <li>Functional similarity from annotations</li>
+  <li>Literature co-occurrence patterns</li>
+</ul>
+
+<h3 id="temporal-analysis">Temporal Analysis</h3>
+<ul>
+  <li>View how relationships change over time</li>
+  <li>Track discovery dates of connections</li>
+  <li>Analyze publication trends</li>
+  <li>Historical pathway evolution</li>
+</ul>
+
+<h2 id="data-quality-and-evidence">Data Quality and Evidence</h2>
+
+<h3 id="confidence-scores">Confidence Scores</h3>
+<ul>
+  <li><strong>High (0.8-1.0)</strong>: Well-established relationships</li>
+  <li><strong>Medium (0.5-0.8)</strong>: Moderate evidence</li>
+  <li><strong>Low (0.0-0.5)</strong>: Preliminary or weak evidence</li>
+</ul>
+
+<h3 id="evidence-sources">Evidence Sources</h3>
+<ul>
+  <li><strong>Literature</strong>: PubMed publications</li>
+  <li><strong>Databases</strong>: Curated biomedical databases</li>
+  <li><strong>Clinical</strong>: Clinical trials and studies</li>
+  <li><strong>Experimental</strong>: Laboratory experiments</li>
+  <li><strong>Computational</strong>: Predicted relationships</li>
+</ul>
+
+<h3 id="quality-assessment">Quality Assessment</h3>
+<ul>
+  <li>Check number of supporting publications</li>
+  <li>Review evidence diversity (multiple sources)</li>
+  <li>Consider publication dates (recent vs old)</li>
+  <li>Validate with external databases</li>
+</ul>
+
+<h2 id="export-and-sharing">Export and Sharing</h2>
+
+<h3 id="export-options">Export Options</h3>
+<ul>
+  <li><strong>Image</strong>: PNG, SVG for publications</li>
+  <li><strong>Data</strong>: CSV, JSON, GraphML</li>
+  <li><strong>Subgraph</strong>: Cypher queries for Neo4j</li>
+  <li><strong>Report</strong>: PDF summary with visualizations</li>
+</ul>
+
+<h3 id="sharing-features">Sharing Features</h3>
+<ul>
+  <li>Generate shareable URLs</li>
+  <li>Create public/private collections</li>
+  <li>Export citation information</li>
+  <li>Integrate with reference managers</li>
+</ul>
+
+<h2 id="tips-and-best-practices">Tips and Best Practices</h2>
+
+<h3 id="effective-exploration">Effective Exploration</h3>
+<ol>
+  <li><strong>Start Broad</strong>: Begin with general terms, then narrow down</li>
+  <li><strong>Use Multiple Entry Points</strong>: Try different starting entities</li>
+  <li><strong>Follow the Evidence</strong>: Focus on high-confidence relationships</li>
+  <li><strong>Cross-validate</strong>: Verify findings with multiple sources</li>
+  <li><strong>Document Insights</strong>: Save interesting findings and hypotheses</li>
+</ol>
+
+<h3 id="common-pitfalls">Common Pitfalls</h3>
+<ul>
+  <li><strong>Information Overload</strong>: Use filters to focus on relevant data</li>
+  <li><strong>False Connections</strong>: Always check evidence and confidence</li>
+  <li><strong>Outdated Information</strong>: Consider publication dates</li>
+  <li><strong>Bias</strong>: Be aware of research publication biases</li>
+  <li><strong>Over-interpretation</strong>: Correlation doesn’t imply causation</li>
+</ul>
+
+<h3 id="performance-tips">Performance Tips</h3>
+<ul>
+  <li><strong>Limit Graph Size</strong>: Use filters for large networks</li>
+  <li><strong>Adjust Visualization</strong>: Simplify complex graphs</li>
+  <li><strong>Use Pagination</strong>: For large result sets</li>
+  <li><strong>Cache Results</strong>: Save frequently used data</li>
+  <li><strong>Optimize Queries</strong>: Be specific in searches</li>
+</ul>
+
+<h2 id="integration-with-other-features">Integration with Other Features</h2>
+
+<h3 id="prediction-models">Prediction Models</h3>
+<ul>
+  <li>Use graph exploration to understand predictions</li>
+  <li>Verify predicted relationships with graph evidence</li>
+  <li>Explore neighborhoods of predicted entities</li>
+</ul>
+
+<h3 id="omics-data">Omics Data</h3>
+<ul>
+  <li>Map analysis results onto the knowledge graph</li>
+  <li>Identify affected pathways and processes</li>
+  <li>Contextualize findings within known biology</li>
+</ul>
+
+<h3 id="literature-chat">Literature Chat</h3>
+<ul>
+  <li>Ask questions about entities you discover</li>
+  <li>Get explanations for complex relationships</li>
+  <li>Find additional context and background</li>
+</ul>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<h3 id="common-issues">Common Issues</h3>
+<ul>
+  <li><strong>Slow Loading</strong>: Reduce graph complexity or use filters</li>
+  <li><strong>Missing Entities</strong>: Try alternative names or synonyms</li>
+  <li><strong>Empty Results</strong>: Check spelling and entity types</li>
+  <li><strong>Visualization Problems</strong>: Try different browsers or layouts</li>
+</ul>
+
+<h3 id="getting-help">Getting Help</h3>
+<ul>
+  <li>Use the built-in help tooltips</li>
+  <li>Check the FAQ for common questions</li>
+  <li>Contact support for technical issues</li>
+  <li>Join community discussions for tips</li>
+</ul>
+
+<p>The knowledge graph is a powerful resource that becomes more valuable as you learn to navigate it effectively. Start with simple explorations and gradually work up to more complex analyses as you become familiar with the data and tools.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">BioMedGPS Documentation</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">BioMedGPS Documentation</li><li><a class="u-email" href="mailto:yjcyxky@163.com">yjcyxky@163.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/yjcyxky"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">yjcyxky</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>BioMedGPS is a knowledge graph platform with graph neural networks for drug repurposing and disease mechanism discovery. This documentation provides comprehensive guides for users to understand and use the platform effectively.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

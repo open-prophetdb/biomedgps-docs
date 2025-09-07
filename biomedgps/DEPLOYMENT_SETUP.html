@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Documentation Deployment Setup | BioMedGPS Documentation</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Documentation Deployment Setup" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="BioMedGPS is a knowledge graph platform with graph neural networks for drug repurposing and disease mechanism discovery. This documentation provides comprehensive guides for users to understand and use the platform effectively." />
+<meta property="og:description" content="BioMedGPS is a knowledge graph platform with graph neural networks for drug repurposing and disease mechanism discovery. This documentation provides comprehensive guides for users to understand and use the platform effectively." />
+<link rel="canonical" href="/DEPLOYMENT_SETUP.html" />
+<meta property="og:url" content="/DEPLOYMENT_SETUP.html" />
+<meta property="og:site_name" content="BioMedGPS Documentation" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Documentation Deployment Setup" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"BioMedGPS is a knowledge graph platform with graph neural networks for drug repurposing and disease mechanism discovery. This documentation provides comprehensive guides for users to understand and use the platform effectively.","headline":"Documentation Deployment Setup","url":"/DEPLOYMENT_SETUP.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="BioMedGPS Documentation" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">BioMedGPS Documentation</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/getting-started/">Getting Started</a><a class="page-link" href="/user-guide/">User Guide</a><a class="page-link" href="/features/">Features Overview</a><a class="page-link" href="/api-reference/">API Reference</a><a class="page-link" href="/faq/">Frequently Asked Questions</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Documentation Deployment Setup</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="documentation-deployment-setup">Documentation Deployment Setup</h1>
+
+<p>This guide explains how to set up the automated documentation deployment from this repository to <code class="language-plaintext highlighter-rouge">open-prophetdb/biomedgps-docs</code>.</p>
+
+<h2 id="current-issue">Current Issue</h2>
+
+<p>The GitHub Action is failing with:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: Input required and not supplied: token
+</code></pre></div></div>
+
+<p>This happens because the <code class="language-plaintext highlighter-rouge">DOCS_DEPLOY_TOKEN</code> secret is not configured.</p>
+
+<h2 id="setup-instructions">Setup Instructions</h2>
+
+<h3 id="step-1-create-personal-access-token">Step 1: Create Personal Access Token</h3>
+
+<ol>
+  <li>Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)</li>
+  <li>Click “Generate new token (classic)”</li>
+  <li>Configure the token:
+    <ul>
+      <li><strong>Name</strong>: <code class="language-plaintext highlighter-rouge">BioMedGPS Docs Deployment</code></li>
+      <li><strong>Expiration</strong>: Choose appropriate duration (recommend 90 days or 1 year)</li>
+      <li><strong>Scopes</strong>: Select these permissions:
+        <ul>
+          <li>✅ <code class="language-plaintext highlighter-rouge">repo</code> (Full control of private repositories)</li>
+          <li>✅ <code class="language-plaintext highlighter-rouge">workflow</code> (Update GitHub Action workflows)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Click “Generate token”</li>
+  <li><strong>Important</strong>: Copy the token value immediately (you won’t see it again)</li>
+</ol>
+
+<h3 id="step-2-add-repository-secret">Step 2: Add Repository Secret</h3>
+
+<ol>
+  <li>Go to your BioMedGPS repository on GitHub</li>
+  <li>Navigate to Settings → Secrets and variables → Actions</li>
+  <li>Click “New repository secret”</li>
+  <li>Configure the secret:
+    <ul>
+      <li><strong>Name</strong>: <code class="language-plaintext highlighter-rouge">DOCS_DEPLOY_TOKEN</code></li>
+      <li><strong>Secret</strong>: Paste the token value from Step 1</li>
+    </ul>
+  </li>
+  <li>Click “Add secret”</li>
+</ol>
+
+<h3 id="step-3-verify-target-repository">Step 3: Verify Target Repository</h3>
+
+<p>Ensure the target repository <code class="language-plaintext highlighter-rouge">open-prophetdb/biomedgps-docs</code> exists and:</p>
+<ul>
+  <li>Has GitHub Pages enabled (Settings → Pages → Source: Deploy from a branch)</li>
+  <li>The token has write access to this repository</li>
+  <li>You are a member of the <code class="language-plaintext highlighter-rouge">open-prophetdb</code> organization with appropriate permissions</li>
+</ul>
+
+<h3 id="step-4-test-deployment">Step 4: Test Deployment</h3>
+
+<p>After setting up the token, you can test the deployment by:</p>
+
+<ol>
+  <li><strong>Manual Trigger</strong>: Go to Actions → Deploy Documentation → Run workflow</li>
+  <li><strong>Push Changes</strong>: Make a small change to any file in the <code class="language-plaintext highlighter-rouge">docs/</code> directory and push to <code class="language-plaintext highlighter-rouge">main</code> or <code class="language-plaintext highlighter-rouge">dev</code></li>
+</ol>
+
+<h2 id="alternative-github-app-token">Alternative: GitHub App Token</h2>
+
+<p>For better security and organization-wide access, consider using a GitHub App instead of a personal access token:</p>
+
+<ol>
+  <li>Create a GitHub App for the organization</li>
+  <li>Install it on both repositories</li>
+  <li>Generate an installation access token</li>
+  <li>Use the app’s token instead of a personal token</li>
+</ol>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<h3 id="token-permission-issues">Token Permission Issues</h3>
+<p>If deployment fails with permission errors:</p>
+<ul>
+  <li>Verify the token has <code class="language-plaintext highlighter-rouge">repo</code> scope</li>
+  <li>Check that you have write access to <code class="language-plaintext highlighter-rouge">open-prophetdb/biomedgps-docs</code></li>
+  <li>Ensure you’re a member of the <code class="language-plaintext highlighter-rouge">open-prophetdb</code> organization</li>
+</ul>
+
+<h3 id="target-repository-issues">Target Repository Issues</h3>
+<p>If the target repository doesn’t exist:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create it manually or ask organization admin</span>
+<span class="c"># Repository should be public for GitHub Pages</span>
+</code></pre></div></div>
+
+<h3 id="workflow-fails-after-token-setup">Workflow Fails After Token Setup</h3>
+<ol>
+  <li>Check the Actions log for specific error messages</li>
+  <li>Verify the secret name is exactly <code class="language-plaintext highlighter-rouge">DOCS_DEPLOY_TOKEN</code></li>
+  <li>Ensure the token hasn’t expired</li>
+  <li>Check repository permissions</li>
+</ol>
+
+<h2 id="security-notes">Security Notes</h2>
+
+<ul>
+  <li><strong>Never commit tokens to the repository</strong></li>
+  <li>Use repository secrets, not hardcoded values</li>
+  <li>Consider token expiration and renewal</li>
+  <li>Use minimal required permissions</li>
+  <li>Consider using GitHub Apps for organization-wide deployments</li>
+</ul>
+
+<h2 id="manual-deployment-fallback">Manual Deployment (Fallback)</h2>
+
+<p>If automated deployment isn’t working, you can manually deploy:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Build documentation locally</span>
+<span class="nb">cd </span>docs
+bundle <span class="nb">install
+</span>bundle <span class="nb">exec </span>jekyll build
+
+<span class="c"># Clone target repository</span>
+git clone https://github.com/open-prophetdb/biomedgps-docs.git
+<span class="nb">cd </span>biomedgps-docs
+
+<span class="c"># Copy files</span>
+<span class="nb">mkdir</span> <span class="nt">-p</span> biomedgps
+<span class="nb">cp</span> <span class="nt">-r</span> ../docs/_site/<span class="k">*</span> biomedgps/
+
+<span class="c"># Commit and push</span>
+git add biomedgps/
+git commit <span class="nt">-m</span> <span class="s2">"Update BioMedGPS documentation"</span>
+git push origin main
+</code></pre></div></div>
+
+<h2 id="contact">Contact</h2>
+
+<p>If you continue to have issues:</p>
+<ul>
+  <li>Check the <a href="https://docs.github.com/en/actions">GitHub Actions documentation</a></li>
+  <li>Create an issue in this repository</li>
+  <li>Contact the repository maintainers</li>
+</ul>
+
+<hr />
+
+<p><strong>Next Steps</strong>: Once you’ve set up the <code class="language-plaintext highlighter-rouge">DOCS_DEPLOY_TOKEN</code> secret, the workflow should run successfully and deploy documentation to <code class="language-plaintext highlighter-rouge">https://open-prophetdb.github.io/biomedgps-docs/biomedgps/</code></p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">BioMedGPS Documentation</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">BioMedGPS Documentation</li><li><a class="u-email" href="mailto:yjcyxky@163.com">yjcyxky@163.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/yjcyxky"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">yjcyxky</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>BioMedGPS is a knowledge graph platform with graph neural networks for drug repurposing and disease mechanism discovery. This documentation provides comprehensive guides for users to understand and use the platform effectively.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
