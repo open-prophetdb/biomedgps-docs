@@ -46,6 +46,7 @@ body {
     color: var(--text-primary);
     background: var(--background);
     overflow-x: hidden;
+    font-size: 16px;
 }
 
 /* Background Animation */
@@ -439,6 +440,7 @@ body {
     border: 2px solid var(--primary-color);
     position: relative;
     overflow: hidden;
+    padding: var(--card-padding);
 }
 
 .platform-card::before {
@@ -457,10 +459,16 @@ body {
     height: 56px;
 }
 
+/* Pipeline Section */
+.pipeline {
+    padding: var(--section-padding);
+    background: var(--background-secondary);
+}
+
 /* CTA Section */
 .cta {
     padding: var(--section-padding);
-    background: var(--background-secondary);
+    background: var(--background);
     text-align: center;
 }
 
