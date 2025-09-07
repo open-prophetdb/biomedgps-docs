@@ -1,7 +1,7 @@
 {
   "source_repo": "open-prophetdb/biomedgps",
-  "source_commit": "a4c3f5e6b0d756123a68326300ac88b91df2f335",
+  "source_commit": "6f045654e61c7e941b79608083c8d837dd9f9790",
   "source_branch": "dev",
-  "build_time": "2025-09-07T20:56:46Z",
-  "workflow_run": "17533770624"
+  "build_time": "2025-09-07T21:06:53Z",
+  "workflow_run": "17533881057"
 }
