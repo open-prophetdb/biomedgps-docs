@@ -185,6 +185,7 @@ jobs:
             # Copy main files
             cp index.html deploy/
             cp styles.css deploy/
+            cp timeline.css deploy/
             cp script.js deploy/
             cp -r images deploy/
             
