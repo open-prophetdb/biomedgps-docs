@@ -372,6 +372,8 @@
     padding: 20px;
     border: none;
     margin-bottom: 0;
+    display: block;
+    align-items: center;
 }
 
 .timeline-container .card-title {
